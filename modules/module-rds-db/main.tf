@@ -12,11 +12,11 @@ terraform {
 ################################################################################
 
 resource "aws_db_subnet_group" "subnetgrup" {
-  name       = var.create_prefix_for_resources ? "${var.project}_${var.env}_${var.subnet_group}" : "${var.subnet_group}"
+  name       = var.subnet_group
   subnet_ids = var.subnet_ids
 
   tags = {
-    Name        = var.create_prefix_for_resources ? "${var.project}_${var.env}_${var.subnet_group}" : "${var.subnet_group}"
+    Name        = var.subnet_group
     Project     = var.project
     Environment = var.env
   }
@@ -30,10 +30,10 @@ module "master" {
   source  = "terraform-aws-modules/rds/aws"
   version = "4.4.0"
   #The name of the RDS instance
-  identifier = var.create_prefix_for_resources ? "${var.project}-${var.env}-${var.rds-master[0].Name}" : "${var.rds-master[0].Name}"
+  identifier = var.rds-master[0].Name
 
   tags = {
-    Name        = var.create_prefix_for_resources ? "${var.project}-${var.env}-${var.rds-master[0].Name}" : "${var.rds-master[0].Name}"
+    Name        = var.rds-master[0].Name
     Project     = var.project
     Environment = var.env
   }
@@ -88,10 +88,10 @@ module "replica" {
   version = "4.4.0"
 
   create_db_instance = var.create_replica
-  identifier         = var.create_prefix_for_resources ? "${var.project}-${var.env}-${var.rds-replica[0].Name}" : "${var.rds-replica[0].Name}"
+  identifier         = var.rds-replica[0].Name
 
   tags = {
-    Name        = var.create_prefix_for_resources ? "${var.project}-${var.env}-${var.rds-replica[0].Name}" : "${var.rds-replica[0].Name}"
+    Name        = var.rds-replica[0].Name
     Project     = var.project
     Environment = var.env
   }
