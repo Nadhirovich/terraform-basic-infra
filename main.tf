@@ -21,7 +21,7 @@ module "module-network-linux-web-db" {
 
   security_group_web          = var.security_group_web
   security_group_db           = var.security_group_db
-  create_prefix_for_resources = var.create_prefix_for_resources
+  /*create_prefix_for_resources = var.create_prefix_for_resources*/
 }
 
 ################################################################################
@@ -41,7 +41,7 @@ module "module-ec2-linux-web" {
   size                        = var.size
   root_disk                   = var.root_disk
   iam_instance_profile        = var.use_cloudwatch_for_logging || var.use_cloudwatch_for_monitoring ? module.module-cloudwatch.cloudwatch_profile_name[0] : null
-  create_prefix_for_resources = var.create_prefix_for_resources
+  //create_prefix_for_resources = var.create_prefix_for_resources
 }
 
 ################################################################################
@@ -72,7 +72,7 @@ module "module-rds-db" {
   secret_password_id          = var.secret_password_id
   create_replica              = var.create_replica
   security_group_db           = var.security_group_db
-  create_prefix_for_resources = var.create_prefix_for_resources
+  //create_prefix_for_resources = var.create_prefix_for_resources
   depends_on = [
     module.module-network-linux-web-db,
   ]
@@ -90,7 +90,7 @@ module "module-s3" {
   project                     = var.project
   cors_rule                   = var.cors_rule
   create_bucket_access_user   = var.create_bucket_access_user
-  create_prefix_for_resources = var.create_prefix_for_resources
+  //create_prefix_for_resources = var.create_prefix_for_resources
 }
 
 ################################################################################
@@ -103,7 +103,7 @@ module "module-cloudwatch" {
   project                       = var.project
   use_cloudwatch_for_logging    = var.use_cloudwatch_for_logging
   cloudwatch_log_group          = var.cloudwatch_log_group
-  create_prefix_for_resources   = var.create_prefix_for_resources
+  //create_prefix_for_resources   = var.create_prefix_for_resources
   use_cloudwatch_for_monitoring = var.use_cloudwatch_for_monitoring
   ec2_instance_id               = module.module-ec2-linux-web.server_id
   notification_email_list       = var.notification_email_list
