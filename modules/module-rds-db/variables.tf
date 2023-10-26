@@ -11,10 +11,10 @@ variable "project" {
   description = "the name of the project"
 }
 
-variable "create_prefix_for_resources" {
+/*variable "create_prefix_for_resources" {
   description = "boolean variable to include the prefix '{var.project}_{var.env}' in all the resourse names."
   default     = true
-}
+}*/
 
 # Networking
 variable "subnet_group" {
